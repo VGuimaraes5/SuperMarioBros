@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 3558051735294649967}
   - component: {fileID: 3558051735294649964}
   - component: {fileID: 3558051735294649965}
-  - component: {fileID: 3558051735294649962}
-  m_Layer: 0
-  m_Name: Pipe
+  - component: {fileID: 7899865401147953464}
+  m_Layer: 8
+  m_Name: Pipe2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3114,17 +3114,16 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
---- !u!64 &3558051735294649962
-MeshCollider:
+--- !u!65 &7899865401147953464
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3558051735294649963}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: fa914f48ec308b446833e880aa40732a, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2.000226, z: 1.902313}
+  m_Center: {x: -1, y: 0.999887, z: 0.000000029802322}
