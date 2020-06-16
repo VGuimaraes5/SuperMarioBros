@@ -12,7 +12,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 m_Movement;
 
     [Header("Ground")]
-    public float m_GroundDistance = 0.01f;
+    public Vector3 m_GroundDistance = new Vector3(0.47f, 0.01f, 0.47f);
     public LayerMask m_GroundLayer;
     public Transform m_Feet;
     private bool m_IsGrounded;
@@ -22,24 +22,30 @@ public class PlayerMovement : MonoBehaviour
     private bool m_IsJumping;
     public float m_JumpTime = 0.33f;
     private float m_JumpElapsedTime;
+    public AudioClip m_SmallJump;
+    public AudioClip m_SuperJump;
+    private bool m_playingJump;
+    //private AudioSource audioSource;
     
     private Rigidbody m_Body;
 
     void Start()
     {
         m_Body = GetComponent<Rigidbody>();
+        //audioSource = GetComponent<AudioSource>();
     }
 
 
     void Update()
     {
-        m_IsGrounded = Physics.CheckSphere(m_Feet.position, m_GroundDistance, m_GroundLayer, QueryTriggerInteraction.Ignore);
+        m_IsGrounded = Physics.CheckBox(m_Feet.position, m_GroundDistance, m_Feet.rotation, m_GroundLayer, QueryTriggerInteraction.Ignore);
         m_Movement.x = Input.GetAxis("Horizontal");
         m_IsRunning = Input.GetButton("Fire1");
 
         if(Input.GetButtonDown("Jump") && m_IsGrounded)
         {
             m_IsJumping = true;
+            m_playingJump = false;
             m_JumpElapsedTime = 0.0f;
         }
     }
@@ -86,7 +92,20 @@ public class PlayerMovement : MonoBehaviour
         {
             if (!Input.GetButton("Jump"))
             {
+                //audioSource.clip = m_SmallJump;
+                if (!m_playingJump)
+                {
+                    AudioSource.PlayClipAtPoint(m_SmallJump, transform.position);
+                    m_playingJump = true;
+                }
                 m_IsJumping = false;
+            }
+            
+            if (!m_playingJump)
+            {
+                //audioSource.clip = m_SuperJump;
+                AudioSource.PlayClipAtPoint(m_SuperJump, transform.position);
+                m_playingJump = true;
             }
         }
 
